@@ -16,6 +16,7 @@ bingon pelaaminen
 
 tulevat toiminnot:
 bingon siirto kaverille
+mobiiliversio
 
-
+------- **** ---------- 
 
