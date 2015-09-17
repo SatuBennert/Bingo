@@ -30,7 +30,7 @@ public class Ruudukko extends JFrame implements ActionListener {
         for (int i = 0; i < labelit.length; i++) {
             System.out.println(labelit[i]);
             etiketit[i] = labelit[i];
-            
+
         }
 // BorderLayout mahdollistaa 'ilmansuuntien' kayton layoutia suunniteltaessa:
         this.setLayout(new BorderLayout());
@@ -178,8 +178,9 @@ public class Ruudukko extends JFrame implements ActionListener {
             nappi22.setBackground(Color.red);
         }
 
-        System.out.println("repaint lähtee");
+        // piirtäminen välivaihe ohjelmanteossa
         uusiBingo.piirra();
+        // tarkistus yms. logiikka pitää siirtää PaaOhjelmaan.... 
         // tarkista, onko bingo
         char voittaja = ' ';
         if (uusiBingo.taulukkoVoittaja() != voittaja) {
@@ -188,7 +189,6 @@ public class Ruudukko extends JFrame implements ActionListener {
         repaint();
     } // actionPerformed-end
 
-    
     public void gui() {
         System.out.println("ruudukko luotu");
         this.pack();
@@ -197,15 +197,5 @@ public class Ruudukko extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    /**
-     * satu public static void main(String[] args) { System.out.println("ohjelma
-     * alkaa"); //seuraava koodi rinnakkaisuuden takia:
-     * javax.swing.SwingUtilities.invokeLater(new Runnable() {
-     *
-     * @Override public void run() { System.out.println("gui alkaa ja bingo
-     * luodaan");
-     *
-     * gui(); System.out.println("gui ohi?"); } }); System.out.println("main
-     * loppuu."); } satu *
-     */
+    
 } // class-ruudukko-end

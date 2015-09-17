@@ -1,7 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Tähän pääohjelmaan pitäisi saada koko logiikka: 
+ * - Ruudukon rakentamisen -kutsu (graafinen, jossa nappia painetaan, kun bingoruutu valitaan)
+ * - reagointi action listenereihin
+ * - tiedostotoiminnot eli TiedostoKasittelija -kutsut
+ * - Bingo toimii ensin 3X3 ruudukolla, joka on tarkoitus muuttaa 5X5 ruudukoksi siten,
+ *   että muutos tulisi voimaan vain PaaOhjelmaa muutamalla
+ * - paketit pitäisi olla omansa ruudukon rakentamiseen, tiedostonkäsittelyyn ja ohjelmaan
+ * 
  */
 package com.satu.bingo;
 
@@ -22,7 +27,9 @@ public class PaaOhjelma {
             @Override
             public void run() {
                 System.out.println("gui alkaa ja bingo luodaan");
+
                 // hae txt-tiedostosta uudet bingolabelit
+                // tässä vasta taulu-parametrin testikäyttö
                 etiketit[0] = "hii";
                 etiketit[1] = "haa";
                 etiketit[2] = "hoo";

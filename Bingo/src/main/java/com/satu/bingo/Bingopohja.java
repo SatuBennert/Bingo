@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.satu.bingo;
 
 /**
@@ -15,12 +10,10 @@ public class Bingopohja {
     private char[][] taulukko = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}}; // alustus
     private int kaikkimerkit, xrivi, xsarake;
 
-    // konstruktori Kuvatus luo uuden jätkänshakin ja nollaa laskurin
+    // konstruktori luo uuden pohjan ja nollaa laskurin
     public Bingopohja() {
         this.kaikkimerkit = 0;
-        System.out.println("konstruktori Bingopohja");
-        System.out.println("0,0 arvo: " + taulukko[0][0]);
-        
+
     }
 
     public boolean muutaMerkki(int rivi, int sarake, char merkki) { // onko indexien arvot ok ja onko tilaa?
@@ -31,16 +24,20 @@ public class Bingopohja {
         } else {
             return false;
         }
-    }
+    }// tarvitaanko ollenkaan? 
 
     public boolean taulukkoEiTaysi() { // taulukkoon mahtuu 9 arvoa
         if (kaikkimerkit < 9) {
             return true;
         } else {
+
             return false;
         }
     }
 
+    // ei tarvita tämmöisenään, mutta kun haetaan tiedostosta
+    // labelit bingoon, niin tarvitsee ottaa mukaan randomisti tekstejä 
+    // -> tarvitaan myöhemmin sovellettuna
     public void arvoMerkkiX() { // arvotaan niin monta kertaa, että tyhjä paikka löytyy 
         do {
             xrivi = (int) (Math.random() * 3);
@@ -65,12 +62,13 @@ public class Bingopohja {
             return taulukko[0][0];
         }
         // vinoon
-        if (taulukko[0][2] != ' ' && taulukko[0][2] == taulukko[1][1] && taulukko[1][1] == taulukko[0][2]) {
+        if (taulukko[0][2] != ' ' && taulukko[0][2] == taulukko[1][1] && taulukko[1][1] == taulukko[2][0]) {
             return taulukko[0][2];
         }
         return ' '; // ei löytynyt voittomerkkijonoa
     }
 
+    // testaamista varten, jotta nähdään, että napit toimivat kuten taulukko
     public void piirra() { // tulostetaan taulukko ja koordinaatit
         for (int i = 0; i < taulukko.length; i++) {
             if (i == 0) {
