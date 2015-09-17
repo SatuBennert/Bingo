@@ -15,7 +15,7 @@ bingoalustan luominen
 bingon pelaaminen 
 
 tulevat toiminnot:
-bingon siirto kaverille
+bingon siirto kaverille ja 
 mobiiliversio
 
 ------- **** ---------- 
