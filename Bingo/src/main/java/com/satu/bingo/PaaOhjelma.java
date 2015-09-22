@@ -11,6 +11,9 @@
 package com.satu.bingo;
 
 import javax.swing.JFrame;
+import javax.swing.JButton;
+import java.io.*;
+import java.util.Scanner;
 
 /**
  *
@@ -19,29 +22,26 @@ import javax.swing.JFrame;
 public class PaaOhjelma {
 
     public static void main(String[] args) {
-        final String[] etiketit = new String[3];
+        final String[] etiketit = new String[9];
 
         System.out.println("ohjelma alkaa");
 //seuraava koodi rinnakkaisuuden takia:
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                System.out.println("gui alkaa ja bingo luodaan");
 
-                // hae txt-tiedostosta uudet bingolabelit
-                // tässä vasta taulu-parametrin testikäyttö
-                etiketit[0] = "hii";
-                etiketit[1] = "haa";
-                etiketit[2] = "hoo";
-
+                File tiedosto = new File("golfbingo.txt");
+                TiedostoKasittelija tk = new TiedostoKasittelija();
                 // anna ruudukolle parametrinä uudet bingolabelit
-                Ruudukko pingoBongo = new Ruudukko(etiketit);
+                Ruudukko pingoBongo = new Ruudukko(tk.haeLabelit(tiedosto));
                 System.out.println("pääohjelma loi Ruudukon");
                 pingoBongo.gui();
                 System.out.println("gui ohi?");
             }
-        });
-        System.out.println("main loppuu.");
+        }
+        );
+        System.out.println(
+                "main loppuu.");
 
     }
 }

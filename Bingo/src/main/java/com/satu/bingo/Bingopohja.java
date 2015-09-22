@@ -13,7 +13,6 @@ public class Bingopohja {
     // konstruktori luo uuden pohjan ja nollaa laskurin
     public Bingopohja() {
         this.kaikkimerkit = 0;
-
     }
 
     public boolean muutaMerkki(int rivi, int sarake, char merkki) { // onko indexien arvot ok ja onko tilaa?
@@ -30,20 +29,8 @@ public class Bingopohja {
         if (kaikkimerkit < 9) {
             return true;
         } else {
-
             return false;
         }
-    }
-
-    // ei tarvita tämmöisenään, mutta kun haetaan tiedostosta
-    // labelit bingoon, niin tarvitsee ottaa mukaan randomisti tekstejä 
-    // -> tarvitaan myöhemmin sovellettuna
-    public void arvoMerkkiX() { // arvotaan niin monta kertaa, että tyhjä paikka löytyy 
-        do {
-            xrivi = (int) (Math.random() * 3);
-            xsarake = (int) (Math.random() * 3);
-        } while (!(muutaMerkki(xrivi, xsarake, 'X')));
-        piirra();
     }
 
     public char taulukkoVoittaja() { // palautetaan merkki, jos se voitti, muuten blanco
