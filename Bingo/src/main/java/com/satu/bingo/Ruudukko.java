@@ -46,7 +46,9 @@ public class Ruudukko extends JFrame implements ActionListener {
         this.add(lukuPaneeli, "North");
 // bingopelipaneeli:
         JPanel nappiPaneeli1 = new JPanel();
-        nappiPaneeli1.setLayout(new FlowLayout());
+        GridBagLayout gridbag = new GridBagLayout();
+        nappiPaneeli1.setLayout(gridbag);
+        GridBagConstraints c = new GridBagConstraints();
         nappiPaneeli1.setBackground(Color.pink);
 
 // sen komponentit
@@ -54,15 +56,33 @@ public class Ruudukko extends JFrame implements ActionListener {
             // luodaan napit
             napit[k] = new JButton(etiketit[k]);
             // lisätään napit paneeliin
+            Component add = nappiPaneeli1.add(napit[k]);
+            c.gridx = 0;
+            c.gridy = 0;
+            gridbag.setConstraints(napit[k], c);
             nappiPaneeli1.add(napit[k]);
+            System.out.println("lisäys arvolla" + napit[k]);
+        }
+        int h = 0;
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++) {
+                c.gridx = i;
+                c.gridy = j;
+                nappiPaneeli1.add(napit[h], c);
+                h++;
+                System.out.println("i=" + i + " J=" + j + " h=" + h);
+            }
+
         }
 
         this.add(nappiPaneeli1, "North");
         // bingopelipaneeli:
-        JPanel nappiPaneeli2 = new JPanel();
-        nappiPaneeli2.setLayout(new FlowLayout());
-
-        nappiPaneeli2.setBackground(Color.pink);
+        /**
+         * * JPanel nappiPaneeli2 = new JPanel(); nappiPaneeli2.setLayout(new
+         * FlowLayout());
+         *
+         * nappiPaneeli2.setBackground(Color.pink); **
+         */
 
 // sen komponentit
        /* nappi10 = new JButton("10");
@@ -71,21 +91,13 @@ public class Ruudukko extends JFrame implements ActionListener {
          nappiPaneeli2.add(napit[3]);
          nappiPaneeli2.add(napit[4]);
          nappiPaneeli2.add(napit[5]); */
-        this.add(nappiPaneeli2);
-
+        /**
+         * this.add(nappiPaneeli2); *
+         */
         // bingopelipaneeli:
         JPanel nappiPaneeli3 = new JPanel();
         nappiPaneeli3.setLayout(new FlowLayout());
         nappiPaneeli3.setBackground(Color.pink);
-
-// sen komponentit
-       /* nappi20 = new JButton("20");
-         nappi21 = new JButton("21");
-         nappi22 = new JButton("22"); 
-         nappiPaneeli3.add(napit[6]);
-         nappiPaneeli3.add(napit[7]);
-         nappiPaneeli3.add(napit[8]); */
-        // tulostusrivi
         tulostuskentta = new JTextField("paina nappia", 20);
         nappiPaneeli3.add(tulostuskentta);
         this.add(nappiPaneeli3, "South");

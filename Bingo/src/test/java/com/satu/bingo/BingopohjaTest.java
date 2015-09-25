@@ -153,17 +153,7 @@ public class BingopohjaTest {
         // fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of arvoMerkkiX method, of class Bingopohja.
-     */
-    @Test
-    public void testArvoMerkkiX() {
-        System.out.println("arvoMerkkiX");
-        Bingopohja instance = new Bingopohja();
-        instance.arvoMerkkiX();
-        // TODO review the generated test code and remove the default call to fail.
-        // fail("The test case is a prototype.");
-    }
+    
 
     /**
      * Test of taulukkoVoittaja method, of class Bingopohja.

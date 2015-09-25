@@ -40,8 +40,6 @@ public class PaaOhjelma {
             }
         }
         );
-        System.out.println(
-                "main loppuu.");
-
+        System.out.println("main loppuu.");
     }
 }

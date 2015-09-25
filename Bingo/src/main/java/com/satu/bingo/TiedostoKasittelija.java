@@ -20,6 +20,13 @@ public class TiedostoKasittelija {
     private ArrayList<String> tiedsis = new ArrayList<>();
     private String[] labelit = new String[9];
 
+    public TiedostoKasittelija() {
+        //alustetaan labelit -taulu 
+        for (int i = 0; i < 9; i++) {
+            labelit[i] = "bullshit";
+        }
+    }
+
     public boolean onkoFOlemassa(File tiedosto) {
         if (tiedosto.exists()) {
             return true;
@@ -33,8 +40,10 @@ public class TiedostoKasittelija {
     }
 
     public String[] haeLabelit(File tiedosto) {
-        lueArrayhin(tiedosto);
-        lueTauluun();
+        if (onkoFOlemassa(tiedosto)) {
+            lueArrayhin(tiedosto);
+            lueTauluun();
+        }
         return labelit;
     }
 
@@ -51,18 +60,16 @@ public class TiedostoKasittelija {
         }
 
     }
-    
+
 // täyttää taulun randomisti olemassa olevilla Array:n alkioilla
     public void lueTauluun() {
-        for (int j = 0; j < 9; j++) {
+        for (int j = 0; j< labelit.length; j++) {
             int k = (int) (Math.random() * tiedsis.size());
             labelit[j] = tiedsis.get(k);
             if (tiedsis.size() > 9) {
                 tiedsis.remove(k);
             }
-            if (labelit[j].equals("")) {
-                labelit[j] = "bullshit";
-            }
+            
         }
 
     }
