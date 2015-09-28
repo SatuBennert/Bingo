@@ -21,6 +21,22 @@ public class BingopohjaTest {
     public BingopohjaTest() {
     }
 
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    @After
+    public void tearDown() throws Exception {
+    }
+
     @Test
     public void testMuutaMerkki_arvot_OK() {
         System.out.println("muutaMerkki");
@@ -121,52 +137,176 @@ public class BingopohjaTest {
     }
 
     /**
-     * Test of taulukkoEiTäysi method, of class Bingopohja.
+     * Test of onBingo method, of class Bingopohja.
      */
     @Test
-    public void testTaulukkoEiTaysi_uusitaulukko() {
-        // palauttaa arvon true, jos taulukko ei ole täynnä ja
-        // uusi taulukko ei ole koskaan täynnä
-        System.out.println("taulukkoEiTaysi");
+    public void testOnBingo() {
+        System.out.println("onBingo");
         Bingopohja instance = new Bingopohja();
-        boolean expResult = true;
-        boolean result = instance.taulukkoEiTaysi();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        // fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testTaulukkoEiTaysi_taysitaulukko() {
-        // laitetaan taulukko täyteen, jolloin palauttaa false
-        System.out.println("taulukkoEiTaysi");
-        Bingopohja instance = new Bingopohja();
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                boolean totuusarvo = instance.muutaMerkki(i, j, 'X');
-            }
-        }
         boolean expResult = false;
-        boolean result = instance.taulukkoEiTaysi();
+        boolean result = instance.onBingo();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        // fail("The test case is a prototype.");
     }
-
-    
 
     /**
-     * Test of taulukkoVoittaja method, of class Bingopohja.
+     * Test of onPystyBingo method, of class Bingopohja.
      */
     @Test
-    public void testTaulukkoVoittaja() {
-        System.out.println("taulukkoVoittaja");
+    public void testOnPystyBingoTyhjalla() {
+        System.out.println("onPystyBingoTyhjällä");
         Bingopohja instance = new Bingopohja();
-        char expResult = ' ';
-        char result = instance.taulukkoVoittaja();
+        boolean expResult = false;
+        boolean result = instance.onPystyBingo();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        // fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testOnPystyBingoOk() {
+        System.out.println("onPystyBingoOk");
+        Bingopohja instance = new Bingopohja();
+        for (int i = 0; i < 5; i++) {
+            instance.muutaMerkki(i, 3, 'X');
+        }
+        instance.piirra();
+        boolean expResult = true;
+        boolean result = instance.onPystyBingo();
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testOnPystyBingoVaakalla() {
+        System.out.println("onPystyBingoVaakalla");
+        Bingopohja instance = new Bingopohja();
+        for (int i = 0; i < 5; i++) {
+            instance.muutaMerkki(2, i, 'X');
+        }
+        instance.piirra();
+        boolean expResult = false;
+        boolean result = instance.onPystyBingo();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of onVaakaBingo method, of class Bingopohja.
+     */
+    @Test
+    public void testOnVaakaBingoTyhjalla() {
+        System.out.println("onVaakaBingoTyhjalla");
+        Bingopohja instance = new Bingopohja();
+        boolean expResult = false;
+        boolean result = instance.onVaakaBingo();
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testOnVaakaBingoOk() {
+        System.out.println("onVaakaBingoOk");
+        Bingopohja instance = new Bingopohja();
+        for (int i = 0; i < 5; i++) {
+            instance.muutaMerkki(3, i, 'X');
+        }
+        instance.piirra();
+        boolean expResult = true;
+        boolean result = instance.onVaakaBingo();
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testOnVaakaBingoPystyllä() {
+        System.out.println("onVaakaBingoPystyllä");
+        Bingopohja instance = new Bingopohja();
+        for (int i = 0; i < 5; i++) {
+            instance.muutaMerkki(i, 2, 'X');
+        }
+        instance.piirra();
+        boolean expResult = false;
+        boolean result = instance.onVaakaBingo();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of onVino1Bingo method, of class Bingopohja.
+     */
+    @Test
+    public void testOnVino1BingoTyhjalla() {
+        System.out.println("onVino1BingoTyhjalla");
+        Bingopohja instance = new Bingopohja();
+        boolean expResult = false;
+        boolean result = instance.onVino1Bingo();
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testOnVino1BingoVaakalla() {
+        System.out.println("onVino1BingoVaakalla");
+        Bingopohja instance = new Bingopohja();
+        for (int i = 0; i < 5; i++) {
+            instance.muutaMerkki(2, i, 'X');
+        }
+        instance.piirra();
+        boolean expResult = false;
+        boolean result = instance.onVino1Bingo();
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testOnVino1BingoOk() {
+        System.out.println("onVino1Bingook");
+        Bingopohja instance = new Bingopohja();
+        for (int i = 0; i < 5; i++) {
+            instance.muutaMerkki(i, i, 'X');
+        }
+        instance.piirra();
+        boolean expResult = true;
+        boolean result = instance.onVino1Bingo();
+        assertEquals(expResult, result);
+
+    }
+
+    /**
+     * Test of onVino2Bingo method, of class Bingopohja.
+     */
+    @Test
+    public void testOnVino2BingoTyhjalla() {
+        System.out.println("onVino2BingoTyhjalla");
+        Bingopohja instance = new Bingopohja();
+        boolean expResult = false;
+        boolean result = instance.onVino2Bingo();
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testOnVino2BingoVaakalla() {
+        System.out.println("onVino2BingoVaakalla");
+        Bingopohja instance = new Bingopohja();
+        for (int i = 0; i < 5; i++) {
+            instance.muutaMerkki(2, i, 'X');
+        }
+        instance.piirra();
+        boolean expResult = false;
+        boolean result = instance.onVino2Bingo();
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testOnVino2BingoOk() {
+        System.out.println("onVino2BingoOk");
+        Bingopohja instance = new Bingopohja();
+        int kx = 4;
+        for (int i = 0; i < 5; i++) {
+            instance.muutaMerkki(i, kx, 'X');
+            kx--;
+        }
+        instance.piirra();
+        boolean expResult = true;
+        boolean result = instance.onVino2Bingo();
+        assertEquals(expResult, result);
+
     }
 
     /**
@@ -174,12 +314,10 @@ public class BingopohjaTest {
      */
     @Test
     public void testPiirra() {
-        // tulostuksen testaaminen?
         System.out.println("piirra");
         Bingopohja instance = new Bingopohja();
         instance.piirra();
-        // TODO review the generated test code and remove the default call to fail.
-        // fail("The test case is a prototype.");
+
     }
 
 }

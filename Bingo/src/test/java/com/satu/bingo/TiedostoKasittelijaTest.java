@@ -32,20 +32,20 @@ public class TiedostoKasittelijaTest {
      * Test of onkoFOlemassa method, of class TiedostoKasittelija.
      */
     @Test
-    public void testOnkoFOlemassaOk() {
-        System.out.println("onkoFOlemassa");
+    public void testOnFOlemassaOk() {
+        System.out.println("onFOlemassa");
         TiedostoKasittelija instance = new TiedostoKasittelija();
         boolean expResult = true;
-        boolean result = instance.onkoFOlemassa(tiedostolyhyt);
+        boolean result = instance.onFOlemassa(tiedostolyhyt);
         assertEquals(expResult, result);
 
     }
      @Test
-    public void testOnkoFOlemassaEiOk() {
+    public void testOnFOlemassaEiOk() {
         System.out.println("onkoFOlemassa");
         TiedostoKasittelija instance = new TiedostoKasittelija();
         boolean expResult = false;
-        boolean result = instance.onkoFOlemassa(tiedostoeiole);
+        boolean result = instance.onFOlemassa(tiedostoeiole);
         assertEquals(expResult, result);
 
     }
@@ -89,7 +89,6 @@ public class TiedostoKasittelijaTest {
     @Test
     public void testHaeLabelitTiedostoPitkaOk() {
         System.out.println("haeLabelit_tiedostopitkaok");
-        File tiedosto = null;
         TiedostoKasittelija instance = new TiedostoKasittelija();
         String[] result = instance.haeLabelit(tiedostopitka);
         System.out.println("labelien lkm: " + result.length);
@@ -106,6 +105,7 @@ public class TiedostoKasittelijaTest {
         System.out.println("haeLabelit_tiedostoeiok");
         TiedostoKasittelija instance = new TiedostoKasittelija();
         String[] result = instance.haeLabelit(tiedostoeiole);
+        System.out.println("labelien lkm: " + result.length);
         for (String result1 : result) {
             System.out.println(result1);
             if (result1.equalsIgnoreCase("")) {

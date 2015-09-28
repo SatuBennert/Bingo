@@ -17,11 +17,15 @@ public class Ruudukko extends JFrame implements ActionListener {
 
     // tekstikentat:
     JTextField tulostuskentta;
+    JTextField nimi;
+    JTextField salasana;
+    JButton tarkista;
     // metodi actionPerformed tarvitsee etiketteja... 
-    String[] etiketit = new String[9];
-    JButton[] napit = new JButton[9];
-    int[][] koordinaatit = new int[3][3];
+    String[] etiketit = new String[25];
+    JButton[] napit = new JButton[25];
+    private int[][] koordinaatit = new int[25][2];
     int xk, yk = 0;
+    int lkmmax = 5;
 
     // Bingopohjassa pidetään yllä valittuja ruutuja  
     Bingopohja uusiBingo = new Bingopohja();
@@ -32,6 +36,7 @@ public class Ruudukko extends JFrame implements ActionListener {
         for (int i = 0; i < labelit.length; i++) {
             System.out.println(labelit[i]);
             etiketit[i] = labelit[i];
+            
         }
 // BorderLayout mahdollistaa 'ilmansuuntien' kayton layoutia suunniteltaessa:
         this.setLayout(new BorderLayout());
@@ -39,99 +44,80 @@ public class Ruudukko extends JFrame implements ActionListener {
 // koko ja taustan vari:
         this.setBackground(Color.green);
 
-// luodaan ylin paneeli: 
-        JPanel lukuPaneeli = new JPanel();
-        lukuPaneeli.setLayout(new FlowLayout());
-        lukuPaneeli.setBackground(Color.white);
-        this.add(lukuPaneeli, "North");
 // bingopelipaneeli:
-        JPanel nappiPaneeli1 = new JPanel();
+        JPanel bingoPaneeli = new JPanel();
         GridBagLayout gridbag = new GridBagLayout();
-        nappiPaneeli1.setLayout(gridbag);
+        bingoPaneeli.setLayout(gridbag);
         GridBagConstraints c = new GridBagConstraints();
-        nappiPaneeli1.setBackground(Color.pink);
+        bingoPaneeli.setBackground(Color.pink);
 
-// sen komponentit
-        for (int k = 0; k < 9; k++) {
-            // luodaan napit
+// luodaan niin monta nappia kuin on taulukossa tietoja 
+        for (int k = 0; k < etiketit.length; k++) {
             napit[k] = new JButton(etiketit[k]);
-            // lisätään napit paneeliin
-            Component add = nappiPaneeli1.add(napit[k]);
-            c.gridx = 0;
-            c.gridy = 0;
-            gridbag.setConstraints(napit[k], c);
-            nappiPaneeli1.add(napit[k]);
-            System.out.println("lisäys arvolla" + napit[k]);
         }
+// laitetaan napit taulukon muotoon ja otetaan koordinaatit talteen
         int h = 0;
-        for (int i = 0; i < 3; i++){
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < lkmmax; i++) {
+            for (int j = 0; j < lkmmax; j++) {
                 c.gridx = i;
                 c.gridy = j;
-                nappiPaneeli1.add(napit[h], c);
+                bingoPaneeli.add(napit[h], c);
+                koordinaatit[h][0] = i;
+                koordinaatit[h][1] = j;
                 h++;
-                System.out.println("i=" + i + " J=" + j + " h=" + h);
             }
-
         }
-
-        this.add(nappiPaneeli1, "North");
-        // bingopelipaneeli:
-        /**
-         * * JPanel nappiPaneeli2 = new JPanel(); nappiPaneeli2.setLayout(new
-         * FlowLayout());
-         *
-         * nappiPaneeli2.setBackground(Color.pink); **
-         */
-
-// sen komponentit
-       /* nappi10 = new JButton("10");
-         nappi11 = new JButton("11");
-         nappi12 = new JButton("12"); 
-         nappiPaneeli2.add(napit[3]);
-         nappiPaneeli2.add(napit[4]);
-         nappiPaneeli2.add(napit[5]); */
-        /**
-         * this.add(nappiPaneeli2); *
-         */
-        // bingopelipaneeli:
-        JPanel nappiPaneeli3 = new JPanel();
-        nappiPaneeli3.setLayout(new FlowLayout());
-        nappiPaneeli3.setBackground(Color.pink);
+        
+        this.add(bingoPaneeli, "South");
+        
+        /* JPanel tekstiPaneeli = new JPanel();
+        tekstiPaneeli.setLayout(new FlowLayout());
+        tekstiPaneeli.setBackground(Color.pink); */
         tulostuskentta = new JTextField("paina nappia", 20);
-        nappiPaneeli3.add(tulostuskentta);
-        this.add(nappiPaneeli3, "South");
-
-// kuuntelijat:
-        // vinkki: napit ja kuuntelijat omiin metodeihinsa
-        for (int k = 0; k < 9; k++) {
-            // luodaan napit
+        /* tekstiPaneeli.add(tulostuskentta);
+        this.add(tekstiPaneeli, "South"); */
+        bingoPaneeli.add(tulostuskentta);
+        
+        
+    }
+    
+    public void lisaaKuuntelijat() {
+        for (int k = 0; k < etiketit.length; k++) {
             napit[k].addActionListener(this);
-            // lisätään napit paneeliin
         }
+        
+    }
+
+    public void rakennaYlaosa() {
+        JPanel userPaneeli = new JPanel();
+        userPaneeli.setLayout(new FlowLayout());
+        userPaneeli.setBackground(Color.white);
+        nimi = new JTextField("syötä käyttäjätunnus", 20);
+        salasana = new JTextField("syötä salasana", 20);
+        tarkista = new JButton("tarkistas alasana");
+        userPaneeli.add(nimi);
+        userPaneeli.add(salasana);
+        userPaneeli.add(tarkista);
+        this.add(userPaneeli, "North");        
+        tarkista.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-// Tanne tullaan, kun kuuntelijat havaitsevat tapahtuman
-        // vinkki: for -luuppi tai HashMap: etiketti avaimena ja nappi arvona?
-
-        System.out.println("action performed alkaa: ");
-
-        for (int a = 0; a < 9; a++) {
+        for (int a = 0; a < etiketit.length; a++) {
+            // satu sama label: ottaa kaikki samat labelit kerralla.
             if (e.getActionCommand().equals(etiketit[a])) {
                 napit[a].removeActionListener(this);
                 napit[a].setBackground(Color.red);
-                // bingopohjan koordinaatit? miten saadaan? mitä niillä tehdään?
+                uusiBingo.muutaMerkki(koordinaatit[a][1], koordinaatit[a][0], 'X');
+                // uusiBingo.piirra();
             }
         }
-        // piirtäminen välivaihe ohjelmanteossa
-        uusiBingo.piirra();
-        // tarkistus yms. logiikka pitää siirtää PaaOhjelmaan.... 
-        // tarkista, onko bingo
-        char voittaja = ' ';
-        if (uusiBingo.taulukkoVoittaja() != voittaja) {
+        if (uusiBingo.onBingo()) {
             tulostuskentta.setText("B I N G O !!!");
+        }
+        if (e.getActionCommand().equals("tarkista")) {
+            salasana.setText("painettu");
         }
         repaint();
     } // actionPerformed-end
@@ -143,5 +129,5 @@ public class Ruudukko extends JFrame implements ActionListener {
         this.setSize(800, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
+    
 } // class-ruudukko-end

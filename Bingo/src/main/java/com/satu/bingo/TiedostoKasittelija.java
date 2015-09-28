@@ -18,16 +18,17 @@ public class TiedostoKasittelija {
 
     // muista, että tiedostonkäsittelyn virheet voi palauttaa Exceptionissa ?!? 
     private ArrayList<String> tiedsis = new ArrayList<>();
-    private String[] labelit = new String[9];
+    private String[] labelit = new String[25];
+    int lkmmax = 25;
 
     public TiedostoKasittelija() {
         //alustetaan labelit -taulu 
-        for (int i = 0; i < 9; i++) {
-            labelit[i] = "bullshit";
+        for (int i = 0; i < lkmmax; i++) {
+            labelit[i] = i + ": bullshit";
         }
     }
 
-    public boolean onkoFOlemassa(File tiedosto) {
+    public boolean onFOlemassa(File tiedosto) {
         if (tiedosto.exists()) {
             return true;
         } else {
@@ -35,12 +36,37 @@ public class TiedostoKasittelija {
         }
     }
 
+    public String haeSalasana(File tiedosto, String user) {
+        boolean loytyi = false;
+        try {
+            Scanner tlukija = new Scanner(tiedosto);
+            while (tlukija.hasNextLine()) {
+                for (String retval : tlukija.nextLine().split(" ")) {
+                    if (loytyi) {
+                        tlukija.close();
+                        return retval;
+                    }
+                    if (retval.matches(user)) {
+                        loytyi = true;
+                    }
+                }
+            }
+            tlukija.close();
+            return null;
+        } catch (FileNotFoundException e) {
+            System.out.println("haeSalasana: tiedostokäsittelyvirhe. " + e);
+        } catch (NoSuchElementException e) {
+            System.out.println("haeSalasana: tiedostokäsittelyvirhe. no element " + e);
+        }
+        return "heipsa";
+    }
+
     public boolean luoF(File tiedosto, String tiedostonimi) {
         return true;
     }
 
     public String[] haeLabelit(File tiedosto) {
-        if (onkoFOlemassa(tiedosto)) {
+        if (onFOlemassa(tiedosto)) {
             lueArrayhin(tiedosto);
             lueTauluun();
         }
@@ -48,28 +74,31 @@ public class TiedostoKasittelija {
     }
 
     public void lueArrayhin(File tiedosto) {
+        Scanner tlukija = null;
         try {
-            Scanner tlukija = new Scanner(tiedosto);
+            tlukija = new Scanner(tiedosto);
             while (tlukija.hasNextLine()) {
                 tiedsis.add(tlukija.nextLine());
             }
+
         } catch (FileNotFoundException e) {
             System.out.println("tiedostokäsittelyvirhe. getLabelit" + e);
         } catch (NoSuchElementException e) {
             System.out.println("tiedostokäsittelyvirhe. no element getLabelit" + e);
         }
-
+        tlukija.close();
     }
 
-// täyttää taulun randomisti olemassa olevilla Array:n alkioilla
+// täyttää taulun randomisti olemassa olevilla Array:n alkioilla, nimet pitää olla unique,
+// koska nappi yksilöityy nimellä
     public void lueTauluun() {
-        for (int j = 0; j< labelit.length; j++) {
+        for (int j = 0; j < labelit.length; j++) {
             int k = (int) (Math.random() * tiedsis.size());
-            labelit[j] = tiedsis.get(k);
-            if (tiedsis.size() > 9) {
+            labelit[j] = j + ": " + tiedsis.get(k);
+            if (tiedsis.size() > lkmmax) {
                 tiedsis.remove(k);
             }
-            
+
         }
 
     }

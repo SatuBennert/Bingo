@@ -10,10 +10,7 @@
  */
 package com.satu.bingo;
 
-import javax.swing.JFrame;
-import javax.swing.JButton;
 import java.io.*;
-import java.util.Scanner;
 
 /**
  *
@@ -22,24 +19,30 @@ import java.util.Scanner;
 public class PaaOhjelma {
 
     public static void main(String[] args) {
-        final String[] etiketit = new String[9];
+        final String[] etiketit = new String[25];
 
-        System.out.println("ohjelma alkaa");
 //seuraava koodi rinnakkaisuuden takia:
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-
+                Kayttaja kayttaja = new Kayttaja("Satu");
+                TiedostoKasittelija tkuser = new TiedostoKasittelija();
+                File users = new File("users.txt");
+                kayttaja.setSalasana(tkuser.haeSalasana(users, kayttaja.getNimi()));
+                System.out.println("onko salasana oikein?: " + kayttaja.tarkistaSalasana("salasana"));
+                // 
                 File tiedosto = new File("golfbingo.txt");
                 TiedostoKasittelija tk = new TiedostoKasittelija();
                 // anna ruudukolle parametrinä uudet bingolabelit
+                Bingopohja b = new Bingopohja();
                 Ruudukko pingoBongo = new Ruudukko(tk.haeLabelit(tiedosto));
-                System.out.println("pääohjelma loi Ruudukon");
+                pingoBongo.lisaaKuuntelijat();
+                pingoBongo.rakennaYlaosa();
+
                 pingoBongo.gui();
                 System.out.println("gui ohi?");
             }
         }
         );
-        System.out.println("main loppuu.");
     }
 }
