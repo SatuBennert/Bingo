@@ -1,4 +1,4 @@
-#pvm|klo|aihe|tunnit
+pvm|klo|aihe|tunnit
 ----|------------------|-----------------------------------|-----
 Pe 04.09.| klo 16.00 - 18.00| 	ympäristön pystytys 		|2.0 t
 ti 08.09.| klo 12.30 - 15.00|	ekat javaluokat
