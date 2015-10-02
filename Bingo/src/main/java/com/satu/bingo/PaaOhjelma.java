@@ -10,7 +10,7 @@
  */
 package com.satu.bingo;
 
-import java.io.*;
+import com.satu.bingo.Kayttoliittymat.*;
 
 /**
  *
@@ -19,30 +19,18 @@ import java.io.*;
 public class PaaOhjelma {
 
     public static void main(String[] args) {
-        final String[] etiketit = new String[25];
 
 //seuraava koodi rinnakkaisuuden takia:
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Kayttaja kayttaja = new Kayttaja("Satu");
-                TiedostoKasittelija tkuser = new TiedostoKasittelija();
-                File users = new File("users.txt");
-                kayttaja.setSalasana(tkuser.haeSalasana(users, kayttaja.getNimi()));
-                System.out.println("onko salasana oikein?: " + kayttaja.tarkistaSalasana("salasana"));
-                // 
-                File tiedosto = new File("golfbingo.txt");
-                TiedostoKasittelija tk = new TiedostoKasittelija();
-                // anna ruudukolle parametrinä uudet bingolabelit
-                Bingopohja b = new Bingopohja();
-                Ruudukko pingoBongo = new Ruudukko(tk.haeLabelit(tiedosto));
-                pingoBongo.lisaaKuuntelijat();
-                pingoBongo.rakennaYlaosa();
-
-                pingoBongo.gui();
+                Valikko v = new Valikko();
+                v.gui();
                 System.out.println("gui ohi?");
             }
+
         }
         );
     }
+
 }

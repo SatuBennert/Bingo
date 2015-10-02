@@ -38,8 +38,10 @@ public class Kayttaja {
         this.salasana = salasana;
     }
 
-    public boolean tarkistaSalasana(String salasana) {
-        if (this.salasana.equals(salasana)) {
+    public boolean tarkistaSalasana(String user, String salasana) {
+        TiedostoKasittelija tkuser = new TiedostoKasittelija();
+        File users = new File("users.txt");
+        if (salasana.equals(tkuser.haeSalasana(users, user))) {
             return true;
         } else {
             return false;

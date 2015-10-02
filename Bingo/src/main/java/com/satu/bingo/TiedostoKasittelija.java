@@ -21,6 +21,10 @@ public class TiedostoKasittelija {
     private String[] labelit = new String[25];
     int lkmmax = 25;
 
+    /**
+     * TiedostoKasittelija -parametritön konstruktori muodostaa oletus taulun
+     * Bingo-peliä varten.
+     */
     public TiedostoKasittelija() {
         //alustetaan labelit -taulu 
         for (int i = 0; i < lkmmax; i++) {
@@ -28,6 +32,12 @@ public class TiedostoKasittelija {
         }
     }
 
+    /**
+     * onFOlemassa -metodi tutkii onko anettu tiedosto olemassa
+     *
+     * @param tiedosto
+     * @return true, tiedosto on olemassa false, tiedostoa ei ole olemassa
+     */
     public boolean onFOlemassa(File tiedosto) {
         if (tiedosto.exists()) {
             return true;
@@ -36,11 +46,21 @@ public class TiedostoKasittelija {
         }
     }
 
+    /**
+     * haeSalasana -metodi hakee annetusta tiedostosta annetulle käyttäjälle
+     * salasanan
+     *
+     * @param tiedosto tiedosto, jossa on käyttäjät ja salasanat
+     * @param user käyttäjä, jonka salasanaa haetaan
+     * @return merkkjono, jonka arvo on salasana, jos salasana löytyi null, jos
+     * salasanaa ei löytynyt
+     */
     public String haeSalasana(File tiedosto, String user) {
         boolean loytyi = false;
         try {
             Scanner tlukija = new Scanner(tiedosto);
             while (tlukija.hasNextLine()) {
+                // tunnus ja salasana erotettu tyhjä -merkillä
                 for (String retval : tlukija.nextLine().split(" ")) {
                     if (loytyi) {
                         tlukija.close();
@@ -58,13 +78,28 @@ public class TiedostoKasittelija {
         } catch (NoSuchElementException e) {
             System.out.println("haeSalasana: tiedostokäsittelyvirhe. no element " + e);
         }
-        return "heipsa";
+        return null;
     }
 
+    /**
+     * luoF -metodi luo tiedoston
+     *
+     * @param tiedosto
+     * @param tiedostonimi
+     * @return true, jos tiedoston luonti onnistui false, jos tiedoston luonti
+     * ei onnistunut
+     */
     public boolean luoF(File tiedosto, String tiedostonimi) {
         return true;
     }
 
+    /**
+     * haeLabelit -metodi hakee annetusta tiedostosta 25 merkkijonoa bingon
+     * sarakkeiden otsikoiksi
+     *
+     * @param tiedosto josta tiedot haetaan
+     * @return yksiulottisen taulukon, jossa on 25 merkkijonoa
+     */
     public String[] haeLabelit(File tiedosto) {
         if (onFOlemassa(tiedosto)) {
             lueArrayhin(tiedosto);
@@ -73,6 +108,13 @@ public class TiedostoKasittelija {
         return labelit;
     }
 
+    /**
+     * lueArrayhin -metodi hakee teksitiedostosta kaikki rivit
+     * vaihtuvamittaiseen Array -muuttujaan
+     *
+     * @param tiedosto tekstitiedosto, jossa rivi vastaa bingon sarakkeen
+     * otsikkoa
+     */
     public void lueArrayhin(File tiedosto) {
         Scanner tlukija = null;
         try {
@@ -89,8 +131,14 @@ public class TiedostoKasittelija {
         tlukija.close();
     }
 
-// täyttää taulun randomisti olemassa olevilla Array:n alkioilla, nimet pitää olla unique,
-// koska nappi yksilöityy nimellä
+    /**
+     * lueTauluun -metodi siirtää vaihtuvamittaisesta Array-muuttujasta 25
+     * merkkijonoa sattumanvaraisesti siten, että jos merkkijonoja on yli 25,
+     * niin samaa ei käytetä kahdesti ja jos merkkijonoja on alle 25, niin
+     * samoja käytetään useamman kerran. Näin pelattava Bingo on joka kerta eri
+     * näköinen. ongelma: nimet pitää olla unique, koska nimi yksilöi painetun
+     * napin
+     */
     public void lueTauluun() {
         for (int j = 0; j < labelit.length; j++) {
             int k = (int) (Math.random() * tiedsis.size());
