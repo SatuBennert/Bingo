@@ -16,3 +16,5 @@ pe 25.09.| klo 14.30 - 18.00|     tiedostokasittelytest ja |
 |||				järkevämpää ruudukkoa		|3,5 t
 ma 28.09.| klo 08.00 - 16.00|     5X5, user-alku		|8,0 t 
 ke 30.09.| klo 11.30 - 11.00| markdown opettelua                |0,5 t
+pe 04.10.| klo 08.30 - 12.30| menurakenneko                | 4,0 t
+pe 04.10.| klo 14.00 - 15.00| javadoc -dokumentointi, vkodok.|1,0 t
