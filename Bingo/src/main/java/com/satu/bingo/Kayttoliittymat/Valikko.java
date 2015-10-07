@@ -63,14 +63,16 @@ public class Valikko implements ActionListener {
             k.gui();
         }
         if (e.getActionCommand().equals("pelaa")) {
-            File tiedosto = new File("bingo.txt");
-            TiedostoKasittelija tk = new TiedostoKasittelija();
-            Bingopohja b = new Bingopohja();
-            BingoIkkuna pingoBongo = new BingoIkkuna(tk.haeLabelit(tiedosto));
+            File tiedosto = new File("golfbingo.txt");
+            TiedostoKasittelija tk = new TiedostoKasittelija(100);
+
+            BingoIkkuna pingoBongo = new BingoIkkuna(tk.haeLabelit(tiedosto), 10);
             pingoBongo.gui();
         }
         if (e.getActionCommand().equals("päivitä bingo")) {
             System.out.println("päivitä");
+            TiedYp ty = new TiedYp();
+            ty.gui();
         }
         frame.repaint();
     } // actionPerformed-end

@@ -22,7 +22,8 @@ public class TiedostoKasittelijaTest {
     private File tiedostolyhyt = new File("bingo.txt");
     private File tiedostopitka = new File("golfbingo.txt");
     private File tiedostoeiole = new File("huuhaa");
-    
+    private int lkm = 9; // labelien lkm
+    private String user = "Satu"; // käyttäjä
 
     public TiedostoKasittelijaTest() {
 
@@ -34,16 +35,17 @@ public class TiedostoKasittelijaTest {
     @Test
     public void testOnFOlemassaOk() {
         System.out.println("onFOlemassa");
-        TiedostoKasittelija instance = new TiedostoKasittelija();
+        TiedostoKasittelija instance = new TiedostoKasittelija(lkm);
         boolean expResult = true;
         boolean result = instance.onFOlemassa(tiedostolyhyt);
         assertEquals(expResult, result);
 
     }
-     @Test
+
+    @Test
     public void testOnFOlemassaEiOk() {
         System.out.println("onkoFOlemassa");
-        TiedostoKasittelija instance = new TiedostoKasittelija();
+        TiedostoKasittelija instance = new TiedostoKasittelija(lkm);
         boolean expResult = false;
         boolean result = instance.onFOlemassa(tiedostoeiole);
         assertEquals(expResult, result);
@@ -51,8 +53,8 @@ public class TiedostoKasittelijaTest {
     }
 
     /**
-     * Test of luoF method, of class TiedostoKasittelija.
-     * luonti ei vielä käytössä
+     * Test of luoF method, of class TiedostoKasittelija. luonti ei vielä
+     * käytössä
      */
     /* @Test
      public void testLuoF() {
@@ -75,7 +77,7 @@ public class TiedostoKasittelijaTest {
     public void testHaeLabelitTiedostolyhytOk() {
         System.out.println("haeLabelit");
         File tiedosto = null;
-        TiedostoKasittelija instance = new TiedostoKasittelija();
+        TiedostoKasittelija instance = new TiedostoKasittelija(lkm);
         String[] result = instance.haeLabelit(tiedostolyhyt);
         System.out.println("labelien lkm: " + result.length);
         for (String result1 : result) {
@@ -86,10 +88,11 @@ public class TiedostoKasittelijaTest {
         }
 
     }
+
     @Test
     public void testHaeLabelitTiedostoPitkaOk() {
         System.out.println("haeLabelit_tiedostopitkaok");
-        TiedostoKasittelija instance = new TiedostoKasittelija();
+        TiedostoKasittelija instance = new TiedostoKasittelija(lkm);
         String[] result = instance.haeLabelit(tiedostopitka);
         System.out.println("labelien lkm: " + result.length);
         for (String result1 : result) {
@@ -100,10 +103,11 @@ public class TiedostoKasittelijaTest {
         }
 
     }
+
     @Test
     public void testHaeLabelitTiedostoVirhe() {
         System.out.println("haeLabelit_tiedostoeiok");
-        TiedostoKasittelija instance = new TiedostoKasittelija();
+        TiedostoKasittelija instance = new TiedostoKasittelija(lkm);
         String[] result = instance.haeLabelit(tiedostoeiole);
         System.out.println("labelien lkm: " + result.length);
         for (String result1 : result) {
@@ -111,30 +115,25 @@ public class TiedostoKasittelijaTest {
             if (result1.equalsIgnoreCase("")) {
                 fail("testHaeLabelitTiedostoVirhe epäonnistui. Labelit blanco.");
             }
-        } 
+        }
     }
 
     /**
      * LueArrayhin method testattu kutsuvan metodin kautta, ei omaa testiä
-     * 
-    @Test
-    public void testLueArrayhin() {
-        
-        System.out.println("lueArrayhin");
-        TiedostoKasittelija instance = new TiedostoKasittelija();
-        instance.lueArrayhin(tiedostoeiole);
-        
-    } */
-
+     *
+     * @Test public void testLueArrayhin() {
+     *
+     * System.out.println("lueArrayhin"); TiedostoKasittelija instance = new
+     * TiedostoKasittelija(); instance.lueArrayhin(tiedostoeiole);
+     *
+     * }
+     */
     /**
      * lueTauluun method testattu kutsuvan metodin kautta, ei omaa testiä
      *
-    @Test
-    public void testLueTauluun() {
-        System.out.println("lueTauluun");
-        TiedostoKasittelija instance = new TiedostoKasittelija();
-        instance.lueTauluun();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    } */
+     * @Test public void testLueTauluun() { System.out.println("lueTauluun");
+     * TiedostoKasittelija instance = new TiedostoKasittelija();
+     * instance.lueTauluun(); // TODO review the generated test code and remove
+     * the default call to fail. fail("The test case is a prototype."); }
+     */
 }

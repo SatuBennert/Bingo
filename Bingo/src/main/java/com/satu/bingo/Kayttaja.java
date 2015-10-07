@@ -39,7 +39,7 @@ public class Kayttaja {
     }
 
     public boolean tarkistaSalasana(String user, String salasana) {
-        TiedostoKasittelija tkuser = new TiedostoKasittelija();
+        TiedostoKasittelija tkuser = new TiedostoKasittelija(user);
         File users = new File("users.txt");
         if (salasana.equals(tkuser.haeSalasana(users, user))) {
             return true;
