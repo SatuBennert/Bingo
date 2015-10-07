@@ -18,3 +18,7 @@ ma 28.09.| klo 08.00 - 16.00|     5X5, user-alku		|8,0 t
 ke 30.09.| klo 11.30 - 11.00| markdown opettelua                |0,5 t
 pe 04.10.| klo 08.30 - 12.30| menurakenneko                | 4,0 t
 pe 04.10.| klo 14.00 - 15.00| javadoc -dokumentointi, vkodok.|1,0 t
+la 05.10 | klo 11.00 - 13.00| sekvenssikaaviot pelaa ja labelit | 2,0 t
+su 06.10.| klo 13.00 - 19.00| JScrollPane googletus, valikkorak.| 8,0 t
+ti 06.10.| klo 13.00 - 14.30| tiedostokäsittelyä | 1,5 t
+ke 07.10.| klo 10.30 - 14.00| tied.käs. | 3,5 t
