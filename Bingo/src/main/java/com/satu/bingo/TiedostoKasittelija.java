@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.satu.bingo;
 
 import java.io.*;
@@ -16,8 +11,7 @@ import java.util.Scanner;
  */
 public class TiedostoKasittelija {
 
-    // muista, että tiedostonkäsittelyn virheet voi palauttaa Exceptionissa ?!?
-    private ArrayList<String> tiedsis = new ArrayList<>();
+    private ArrayList<String> tiedsis;
     private String[] labelit;
     int lkm;
     String user;
@@ -55,14 +49,10 @@ public class TiedostoKasittelija {
      * @return true, tiedosto on olemassa false, tiedostoa ei ole olemassa
      */
     public boolean onFOlemassa(File tiedosto) {
-        System.out.println("onFOlemassa -metodissa: " + tiedosto.toString());
         if (tiedosto.exists()) {
-            System.out.println("onFOlemassa -metodi.tiedosto löyty.");
             return true;
         }
-        System.out.println("onFOlemassa metodissa. ei löydy tiedostoa");
         return false;
-
     }
 
     /**
@@ -100,101 +90,46 @@ public class TiedostoKasittelija {
         return null;
     }
 
-    /**
-     * lueSeuraava -metodi palauttaa seuraavan teksitiedoston rivin
-     *
-     * Lähtöoletus: tiedosto on olemassa, mutta voi olla tyhjä
-     *
-     * @param tiedosto, josta haetaan
-     *
-     * @param otsikko, rivi, jonka arvosta seuraava rivi palautetaan jos otsikko
-     * = tyhjä, palautetaan ekan rivin arvo jos otsikko on viimeinen rivi,
-     * palautetaan ekan rivin arvo jos ongelmia, palautetaan tyhjä arvo
-     *
-     * @return
-     */
-    public String lueSeuraava(File tiedosto, String otsikko) {
-        boolean loytyi = false;
-        boolean ekaluettu = false;
-        String tiedots = "";
-        String luettu = "";
-        try {
-            Scanner tlukija = new Scanner(tiedosto);
-            while (tlukija.hasNextLine()) {
-                System.out.println("on seurraava rivi");
-                luettu = tlukija.nextLine();
-                System.out.println("luettu: " + luettu);
-                if (loytyi) {
-                    tiedots = luettu;
-                    System.out.println("löytyi eli palaut.seur: " + tiedots);
-                    return tiedots;
-                }
-                if (!ekaluettu) {
-                    tiedots = luettu; // eka talteen
-                    System.out.println("eka talteen: " + tiedots);
-                    ekaluettu = true;
-                }
-                if (luettu.equalsIgnoreCase(otsikko)) {
-                    System.out.println("löytyi sama eli : " + otsikko);
-                    loytyi = true; // on etsitty otsikko, palauta seuraava
+    public String haeEdellinen(File tiedosto, String otsikko) {
+        if (onFOlemassa(tiedosto)) {
+            lueArrayhin(tiedosto);
+            System.out.println("tied.sis. edellinen. size: " + tiedsis.size());
+            for (int i = 0; i < tiedsis.size(); i++) {
+                if (tiedsis.get(i).equalsIgnoreCase(otsikko)) {
+                    if (i - 1 < 0) { // viimeinen
+                        return tiedsis.get(tiedsis.size() - 1);
+                    } else { // edellinen
+                        return tiedsis.get(i - 1);
+                    }
                 }
             }
-            tlukija.close();
-            System.out.println("palautetaan tiedost: " + tiedots);
-            return tiedots;
-        } catch (FileNotFoundException e) {
-            System.out.println("lueSeuraava: tiedostokäsittelyvirhe. " + e);
-        } catch (NoSuchElementException e) {
-            System.out.println("lueSeuraava: tiedostokäsittelyvirhe. no element " + e);
+            return tiedsis.get(0); // palauta eka, jos ei löydy
         }
-        return tiedots;
-    }
-
-    public String lueEdellinen(File tiedosto, String otsikko) {
-        boolean loytyi = false;
-        boolean ekaluettu = false;
-        String tiedots = otsikko;
-        String luettu = "";
-        try {
-            Scanner tlukija = new Scanner(tiedosto);
-            while (tlukija.hasNextLine()) {
-                luettu = tlukija.nextLine();
-                System.out.println("luettu: " + luettu);
-                if (luettu.equalsIgnoreCase(otsikko)) {
-                    System.out.println("löytyi sama eli : " + otsikko);
-                    return tiedots; // on etsitty otsikko, palauta edellinen tai tyhjä
-                }
-                tiedots = luettu; // luettu talteen
-            }
-            tlukija.close();
-            System.out.println("palautetaan tiedost: " + tiedots);
-            return tiedots;
-        } catch (FileNotFoundException e) {
-            System.out.println("lueSeuraava: tiedostokäsittelyvirhe. " + e);
-        } catch (NoSuchElementException e) {
-            System.out.println("lueSeuraava: tiedostokäsittelyvirhe. no element " + e);
-        }
-        return tiedots;
+        return "Luo uusi.";
     }
 
     /**
      * luoF -metodi luo tiedoston
      *
      * @param tiedosto
-     * @param tiedostonimi
      * @return true, jos tiedoston luonti onnistui false, jos tiedoston luonti
      * ei onnistunut
      */
-    public boolean luoF(File tiedosto, String tiedostonimi) {
+    public boolean luoF(File tiedosto) {
+        try {
+            FileWriter fw = new FileWriter(tiedosto, true); // kirjoitetaan perään
+        } catch (Exception e) {
+            return false;
+        }
         return true;
     }
 
     /**
-     * haeLabelit -metodi hakee annetusta tiedostosta 25 merkkijonoa bingon
+     * haeLabelit -metodi hakee annetusta tiedostosta merkkijonot bingon
      * sarakkeiden otsikoiksi
      *
      * @param tiedosto josta tiedot haetaan
-     * @return yksiulottisen taulukon, jossa on 25 merkkijonoa
+     * @return yksiulottisen taulukon, jossa on toivottu määrä merkkijonoja
      */
     public String[] haeLabelit(File tiedosto) {
         if (onFOlemassa(tiedosto)) {
@@ -204,38 +139,130 @@ public class TiedostoKasittelija {
         return labelit;
     }
 
-    public boolean talletaLabelit(File tiedosto, ArrayList labelit) {
-        return true;
+    public void talletaBingoOtsikko(File tiedosto, String otsikko) {
+        if (onFOlemassa(tiedosto)) {
+            if (!onOtsikkoOlemassa(tiedosto, otsikko)) {
+                lisaaTiedostoon(tiedosto, "\n" + otsikko);
+            }
+        }
     }
 
-    public String haeSeuraavaOtsikko(File tiedosto, String otsikko) {
-        System.out.println("hae seuraava otsikko. otsikolla: " + otsikko);
+    public boolean poistaTiedosto(File tiedosto) {
         if (onFOlemassa(tiedosto)) {
-            return lueSeuraava(tiedosto, otsikko);
+            return tiedosto.delete();
         }
-        return "Ei ole seuraavaa.";
+        return false;
     }
 
-    public String haeEdellinenOtsikko(File tiedosto, String otsikko) {
-        System.out.println("hae edellinen otsikko. otsikolla: " + otsikko);
+    public void poistaBingoOtsikko(File tiedosto, String otsikko) {
+        StringBuilder string = new StringBuilder();
         if (onFOlemassa(tiedosto)) {
-            return lueSeuraava(tiedosto, otsikko);
+            if (onOtsikkoOlemassa(tiedosto, otsikko)) {
+                for (int i = 0; i < tiedsis.size(); i++) {
+                    if (tiedsis.get(i).equalsIgnoreCase(otsikko)) {
+                        tiedsis.remove(i);
+                    }
+                    string.append(tiedsis.get(i));
+                    string.append("\n");
+                }
+                talletaTiedosto(tiedosto, string.toString());
+            }
         }
-        return "Ei ole seuraavaa.";
+    }
+
+    public boolean onOtsikkoOlemassa(File tiedosto, String otsikko) {
+        lueArrayhin(tiedosto);
+        for (int i = 0; i < tiedsis.size(); i++) {
+            if (tiedsis.get(i).equalsIgnoreCase(otsikko)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void lisaaTiedostoon(File tiedosto, String tieto) {
+        try {
+            FileWriter f = new FileWriter(tiedosto, true);
+            f.write(tieto);
+            System.out.println("kirjoitettu perään: " + tieto);
+            f.close();
+        } catch (IOException e) {
+            System.out.println("lisääTiedostoon: Tiedoston sulkuongelmia. " + e);
+        } catch (Exception e) {
+            System.out.println("lisääTiedostoon: Tiedosto-ongelmia. " + e);
+        }
+    }
+
+    public void talletaTiedosto(File tiedosto, String labelit) {
+        if (!onFOlemassa(tiedosto)) {
+            luoF(tiedosto);
+        }
+        korvaaTiedosto(tiedosto, labelit);
+    }
+
+    public void korvaaTiedosto(File tiedosto, String tieto) {
+        try {
+            FileWriter f = new FileWriter(tiedosto);
+            f.write(tieto);
+            f.close();
+        } catch (IOException e) {
+            System.out.println("korvaaTiedosto: Tiedoston sulkuongelmia. " + e);
+        } catch (Exception e) {
+            System.out.println("kovaaTiedosto: Tiedosto-ongelmia. " + e);
+        }
+    }
+
+    /**
+     * haeSeuraava -metodi palauttaa otsikko -parametriä seuraavan
+     * teksitiedoston rivin
+     *
+     * Lähtöoletus: tiedosto on olemassa, mutta voi olla tyhjä
+     *
+     * @param tiedosto, josta haetaan
+     *
+     * @param otsikko, rivi, jonka arvosta seuraava rivi palautetaan * @return
+     * seuraavan otsikon arvo tai eka, jos seuraava olisi yli tiedoston tai eka,
+     * jos ei löydy annettua riviä tai vakio, jos ongelmia
+     * @return merkkijono, jossa seuraavan rivin arvo
+     */
+    public String haeSeuraava(File tiedosto, String otsikko) {
+        if (onFOlemassa(tiedosto)) {
+            lueArrayhin(tiedosto);
+            System.out.println("tied.sis. seuraava. size: " + tiedsis.size());
+            for (int i = 0; i < tiedsis.size(); i++) {
+                if (tiedsis.get(i).equalsIgnoreCase(otsikko)) {
+                    if (i + 1 > tiedsis.size() - 1) { // viimeinen?
+                        return tiedsis.get(0); // palauta eka
+                    } else {
+                        return tiedsis.get(i + 1); // palauta seuraava
+                    }
+                }
+            }
+            return tiedsis.get(0); // palauta eka, jos ei löydy
+        }
+        return "Luo uusi.";
     }
 
     public String haeKaikkiStringiin(File tiedosto) {
-        return lueStringiin(tiedosto);
+        StringBuilder string = new StringBuilder();
+        if (onFOlemassa(tiedosto)) {
+            lueArrayhin(tiedosto);
+            for (String rivi : tiedsis) {
+                string.append(rivi);
+                string.append("\n");
+            }
+        }
+        return string.toString();
     }
 
     /**
      * lueArrayhin -metodi hakee teksitiedostosta kaikki rivit
      * vaihtuvamittaiseen Array -muuttujaan
      *
-     * @param tiedosto tekstitiedosto, jossa rivi vastaa bingon sarakkeen
-     * otsikkoa
+     * @param tiedosto tekstitiedosto
      */
     public void lueArrayhin(File tiedosto) {
+        tiedsis = new ArrayList<>();
         Scanner tlukija = null;
         try {
             tlukija = new Scanner(tiedosto);
@@ -250,31 +277,13 @@ public class TiedostoKasittelija {
         tlukija.close();
     }
 
-    public String lueStringiin(File tiedosto) {
-        Scanner tlukija = null;
-        StringBuilder string = new StringBuilder();
-        try {
-            tlukija = new Scanner(tiedosto);
-            while (tlukija.hasNextLine()) {
-                string.append(tlukija.nextLine());
-                string.append("\n");
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("tiedostokäsittelyvirhe. getLabelit" + e);
-        } catch (NoSuchElementException e) {
-            System.out.println("tiedostokäsittelyvirhe. no element getLabelit" + e);
-        }
-        tlukija.close();
-        return string.toString();
-    }
-
     /**
-     * lueTauluun -metodi siirtää vaihtuvamittaisesta Array-muuttujasta 25
-     * merkkijonoa sattumanvaraisesti siten, että jos merkkijonoja on yli 25,
-     * niin samaa ei käytetä kahdesti ja jos merkkijonoja on alle 25, niin
-     * samoja käytetään useamman kerran. Näin pelattava Bingo on joka kerta eri
-     * näköinen. ongelma: nimet pitää olla unique, koska nimi yksilöi painetun
-     * napin
+     * lueTauluun -metodi siirtää vaihtuvamittaisesta Array-muuttujasta
+     * merkkijonoja sattumanvaraisesti siten, että jos merkkijonoja on yli
+     * taulun koon, niin samaa ei käytetä kahdesti ja jos merkkijonoja on alle
+     * taulun koon, niin samoja käytetään useamman kerran. Näin pelattava Bingo
+     * on joka kerta eri näköinen. ongelma: nimet pitää olla unique, koska nimi
+     * yksilöi painetun napin
      */
     public void lueTauluun() {
         for (int j = 0; j < labelit.length; j++) {

@@ -5,13 +5,9 @@
  */
 package com.satu.bingo.Kayttoliittymat;
 
-import com.satu.bingo.Bingopohja;
-import com.satu.bingo.Kayttaja;
-import com.satu.bingo.TiedostoKasittelija;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import javax.swing.*;
 
 /**
@@ -28,30 +24,22 @@ public class Valikko implements ActionListener {
         JPanel menuPaneeli = new JPanel();
         menuPaneeli.setBackground(Color.pink);
         JButton login = new JButton("log in");
-        JButton pelaa = new JButton("pelaa");
-        JButton paivita = new JButton("päivitä bingo");
+        JButton bingo = new JButton("bingo");
         menuPaneeli.add(login);
-        menuPaneeli.add(pelaa);
-        menuPaneeli.add(paivita);
+        menuPaneeli.add(bingo);
         frame.add(menuPaneeli, "North");
-        login.addActionListener(this);
-        pelaa.addActionListener(this);
-        paivita.addActionListener(this);
 
-//        JPanel keskiPaneeli = new JPanel();
-//        JButton paivita = new JButton("päivitä bingo");
-//        keskiPaneeli.add(paivita);
-//        keskiPaneeli.setSize(500, 500);
-//        keskiPaneeli.setBackground(Color.pink);
-//        frame.add(keskiPaneeli, "East");
-//        paivita.addActionListener(this);
+        login.addActionListener(this);
+        bingo.addActionListener(this);
+
     }
 
     public void gui() {
         frame.pack();
         frame.setTitle("Bingo-otus");
+        frame.setBackground(Color.pink);
         frame.setVisible(true);
-
+//        frame.setSize(3000, 2000); demo
         frame.setSize(1000, 1000);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -62,15 +50,8 @@ public class Valikko implements ActionListener {
             Kirjautuminen k = new Kirjautuminen();
             k.gui();
         }
-        if (e.getActionCommand().equals("pelaa")) {
-            File tiedosto = new File("golfbingo.txt");
-            TiedostoKasittelija tk = new TiedostoKasittelija(100);
 
-            BingoIkkuna pingoBongo = new BingoIkkuna(tk.haeLabelit(tiedosto), 10);
-            pingoBongo.gui();
-        }
-        if (e.getActionCommand().equals("päivitä bingo")) {
-            System.out.println("päivitä");
+        if (e.getActionCommand().equals("bingo")) {
             TiedYp ty = new TiedYp();
             ty.gui();
         }

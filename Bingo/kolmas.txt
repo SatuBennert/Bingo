@@ -1,0 +1,4 @@
+Kirjoita bingolabelit.
+Label per rivi.
+kolmas rivi
+neljas rivi

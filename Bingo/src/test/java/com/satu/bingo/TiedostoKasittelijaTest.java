@@ -6,10 +6,6 @@
 package com.satu.bingo;
 
 import java.io.File;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -19,7 +15,7 @@ import static org.junit.Assert.*;
  */
 public class TiedostoKasittelijaTest {
 
-    private File tiedostolyhyt = new File("bingo.txt");
+    private File tiedostolyhyt = new File("isi.txt");
     private File tiedostopitka = new File("golfbingo.txt");
     private File tiedostoeiole = new File("huuhaa");
     private int lkm = 9; // labelien lkm
