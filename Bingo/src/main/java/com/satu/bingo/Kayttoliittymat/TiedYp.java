@@ -14,8 +14,7 @@ import javax.swing.*;
 public class TiedYp implements ActionListener {
 
     JTextField otsikko;
-    JScrollPane jsp;
-    TextArea textArea;
+    JTextArea textArea;
     JButton talleta, edellinen, seuraava, uusi, poista;
     JFrame jf;
     JPanel paneeli;
@@ -26,6 +25,11 @@ public class TiedYp implements ActionListener {
 
     public TiedYp() {
         jf = new JFrame();
+        textArea = new JTextArea(5, 30);
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setPreferredSize(new Dimension(450, 110));
+
         jf.setLayout(new BorderLayout());
         otsikko = new JTextField("otsikko", 30);
         talleta = new JButton("talleta");
@@ -33,33 +37,32 @@ public class TiedYp implements ActionListener {
         edellinen = new JButton("edellinen");
         uusi = new JButton("uusi");
         poista = new JButton("poista");
-        textArea = new TextArea();
-        textArea.setSize(800, 600);
+
         JComboBox bingoGames = new JComboBox(bingos);
         bingoGames.setSelectedIndex(0);
-        tk = new TiedostoKasittelija("Satu");
-        otstiedosto = new File("Satu.txt");
-        jsp = new JScrollPane(textArea);
+
         paneeli = new JPanel();
         paneeli.add(otsikko);
         paneeli.add(edellinen);
         paneeli.add(seuraava);
         paneeli.add(uusi);
-        paneeli.add(jsp);
+        paneeli.add(scrollPane);
         paneeli.add(talleta);
         paneeli.add(bingoGames);
         paneeli.add(poista);
         paneeli.setBackground(Color.pink);
+
         jf.add(paneeli, BorderLayout.CENTER);
 
-        
         seuraava.addActionListener(this);
         edellinen.addActionListener(this);
         talleta.addActionListener(this);
         uusi.addActionListener(this);
         poista.addActionListener(this);
         bingoGames.addActionListener(this);
-        
+
+        tk = new TiedostoKasittelija("Satu");
+        otstiedosto = new File("Satu.txt");
 
     }
 
@@ -126,7 +129,7 @@ public class TiedYp implements ActionListener {
             }
         }
         jf.repaint();
-        textArea.repaint();
+//        textArea.repaint();
     }
 
     public void gui() {

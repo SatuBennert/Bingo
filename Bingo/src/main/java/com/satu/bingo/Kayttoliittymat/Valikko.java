@@ -55,6 +55,7 @@ public class Valikko implements ActionListener {
             TiedYp ty = new TiedYp();
             ty.gui();
         }
+
         frame.repaint();
     } // actionPerformed-end
 }

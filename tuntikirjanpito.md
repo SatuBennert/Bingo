@@ -24,3 +24,5 @@ ti 06.10.| klo 13.00 - 14.30| tiedostokäsittelyä | 1,5 t
 ke 07.10.| klo 10.30 - 14.00| tied.käs. | 3,5 t
 ke 07.10.| klo 18.00 - 22.00| tied.käs, JComboBox | 4,0 t
 to 09.10.| klo 08.00 - 09.00| textArea? | 1,0 t
+to 09.10.| klo 17.30. -18.30| JtextArea korjaus | 1,0 t
+
