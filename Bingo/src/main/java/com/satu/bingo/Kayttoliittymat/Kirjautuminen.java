@@ -8,6 +8,7 @@ package com.satu.bingo.Kayttoliittymat;
 import com.satu.bingo.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import javax.swing.*;
 
 /**
@@ -47,8 +48,10 @@ public class Kirjautuminen implements ActionListener {
     }
 
     static boolean tarkistaKayttaja(String user, String salasana) {
-        Kayttaja kayttaja = new Kayttaja(user);
-        if (kayttaja.tarkistaSalasana(user, salasana)) {
+        Kayttaja kayttaja = new Kayttaja(user, salasana);
+        File tiedosto = new File("users.txt");
+        
+        if (kayttaja.tarkistaSalasana(tiedosto, user, salasana)) {
             return true;
         } else {
             return false;

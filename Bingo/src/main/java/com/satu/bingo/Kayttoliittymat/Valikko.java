@@ -52,7 +52,7 @@ public class Valikko implements ActionListener {
         }
 
         if (e.getActionCommand().equals("bingo")) {
-            TiedYp ty = new TiedYp();
+            BingoYllapito ty = new BingoYllapito();
             ty.gui();
         }
 

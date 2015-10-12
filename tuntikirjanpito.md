@@ -24,5 +24,7 @@ ti 06.10.| klo 13.00 - 14.30| tiedostokäsittelyä | 1,5 t
 ke 07.10.| klo 10.30 - 14.00| tied.käs. | 3,5 t
 ke 07.10.| klo 18.00 - 22.00| tied.käs, JComboBox | 4,0 t
 to 09.10.| klo 08.00 - 09.00| textArea? | 1,0 t
-to 09.10.| klo 17.30. -18.30| JtextArea korjaus | 1,0 t
-
+to 09.10.| klo 17.30 - 18.30| JtextArea korjaus | 1,0 t
+pe 09.10.| klo 14.00 - 18.00| testien tekoa | 4,0 t 
+su 11.10.| klo 15.00 - 19.00| olio tiedostoon -opettelua | 4,0 t
+ma 12.10.| klo 08.00 - 13.00| testien kirj., pit ja cobertura | 5,0 t

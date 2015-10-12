@@ -349,4 +349,6 @@ public class BingopohjaTest {
         System.out.println(Arrays.toString(result));
 //    	assertArrayEquals(expResult, result);
     }
+
+    
 }

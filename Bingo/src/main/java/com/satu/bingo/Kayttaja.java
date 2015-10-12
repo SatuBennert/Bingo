@@ -25,6 +25,10 @@ public class Kayttaja {
         this.nimi = nimi;
         this.salasana = "";
     }
+    public Kayttaja(String nimi, String salasana) {
+        this.nimi = nimi;
+        this.salasana = salasana;
+    }
 
     public String getNimi() {
         return this.nimi;
@@ -38,10 +42,10 @@ public class Kayttaja {
         this.salasana = salasana;
     }
 
-    public boolean tarkistaSalasana(String user, String salasana) {
+    public boolean tarkistaSalasana(File tiedosto, String user, String salasana) {
         TiedostoKasittelija tkuser = new TiedostoKasittelija(user);
-        File users = new File("users.txt");
-        if (salasana.equals(tkuser.haeSalasana(users, user))) {
+//        File users = new File("users.txt");
+        if (salasana.equals(tkuser.haeSalasana(tiedosto, user))) {
             return true;
         } else {
             return false;

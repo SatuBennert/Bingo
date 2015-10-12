@@ -19,7 +19,7 @@ public class BingoIkkuna extends JFrame implements ActionListener {
     JTextField tulostuskentta;
     String[] etiketit;
     JButton[] napit;
-    private int[][] koordinaatit;
+    private final int[][] koordinaatit;
     int lkmmax;
     // Bingopohjassa pidetään yllä valittuja ruutuja 
     Bingopohja uusiBingo;
@@ -32,12 +32,10 @@ public class BingoIkkuna extends JFrame implements ActionListener {
         etiketit = new String[labelit.length];
         System.arraycopy(labelit, 0, etiketit, 0, labelit.length);
         this.setLayout(new GridLayout(lkmmax, lkmmax));
-//    	tulostuskentta = new JTextField(10);
-//    	this.add(tulostuskentta);
-// luodaan niin monta nappia kuin on taulukossa tietoja
         for (int k = 0; k < etiketit.length; k++) {
             napit[k] = new JButton(etiketit[k]);
             napit[k].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+            napit[k].setFont(new Font("Sans Serif", Font.BOLD, 25));
         }
         // lisätään napit taulukkoon ja otetaan koordinaatit (rivi, sarake) talteen
         int h = 0;

@@ -11,7 +11,7 @@ import javax.swing.*;
  *
  * @author satu
  */
-public class TiedYp implements ActionListener {
+public class BingoYllapito implements ActionListener {
 
     JTextField otsikko;
     JTextArea textArea;
@@ -23,7 +23,7 @@ public class TiedYp implements ActionListener {
     int koko, lkm;
     String[] bingos = {"Pelaa Bingo 3X3", "Pelaa Bingo 5X5", "Pelaa Bingo 7X7", "Pelaa Bingo 8X8", "Pelaa Bingo 10X10"};
 
-    public TiedYp() {
+    public BingoYllapito() {
         jf = new JFrame();
         textArea = new JTextArea(5, 30);
 
@@ -43,8 +43,8 @@ public class TiedYp implements ActionListener {
 
         paneeli = new JPanel();
         paneeli.add(otsikko);
-        paneeli.add(edellinen);
         paneeli.add(seuraava);
+        paneeli.add(edellinen);
         paneeli.add(uusi);
         paneeli.add(scrollPane);
         paneeli.add(talleta);
@@ -138,6 +138,6 @@ public class TiedYp implements ActionListener {
         jf.setVisible(true);
         jf.setSize(500, 300);
 //   	/* j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
-        System.out.println("gui ok");
+        
     }
 }

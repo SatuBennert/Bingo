@@ -1,11 +1,6 @@
-/*
- * Tähän pääohjelmaan pitäisi saada koko logiikka: 
- * - Ruudukon rakentamisen -kutsu (graafinen, jossa nappia painetaan, kun bingoruutu valitaan)
- * - reagointi action listenereihin
- * - tiedostotoiminnot eli TiedostoKasittelija -kutsut
- * - Bingo toimii ensin 3X3 ruudukolla, joka on tarkoitus muuttaa 5X5 ruudukoksi siten,
- *   että muutos tulisi voimaan vain PaaOhjelmaa muutamalla
- * - paketit pitäisi olla omansa ruudukon rakentamiseen, tiedostonkäsittelyyn ja ohjelmaan
+/**
+ * PaaOhjelma -luokka kutsuu Valikkoa, josta varsinainen ohjelma alkaa LogIn -ja
+ * BingonYlläpito -napeilla.
  * 
  */
 package com.satu.bingo;
@@ -24,9 +19,9 @@ public class PaaOhjelma {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Valikko v = new Valikko();
-                v.gui();
-                System.out.println("gui ohi?");
+                Valikko valikko = new Valikko();
+                valikko.gui();
+                
             }
 
         }

@@ -84,26 +84,23 @@ public class TiedostoKasittelija {
             return null;
         } catch (FileNotFoundException e) {
             System.out.println("haeSalasana: tiedostokäsittelyvirhe. " + e);
-        } catch (NoSuchElementException e) {
-            System.out.println("haeSalasana: tiedostokäsittelyvirhe. no element " + e);
-        }
+        } 
         return null;
     }
 
     public String haeEdellinen(File tiedosto, String otsikko) {
         if (onFOlemassa(tiedosto)) {
             lueArrayhin(tiedosto);
-            System.out.println("tied.sis. edellinen. size: " + tiedsis.size());
             for (int i = 0; i < tiedsis.size(); i++) {
                 if (tiedsis.get(i).equalsIgnoreCase(otsikko)) {
-                    if (i - 1 < 0) { // viimeinen
+                    if (i - 1 < 0) { // jos eka, palauta vika
                         return tiedsis.get(tiedsis.size() - 1);
                     } else { // edellinen
                         return tiedsis.get(i - 1);
                     }
                 }
             }
-            return tiedsis.get(0); // palauta eka, jos ei löydy
+           return tiedsis.get(0); // palauta eka, jos ei löydy
         }
         return "Luo uusi.";
     }
@@ -117,10 +114,16 @@ public class TiedostoKasittelija {
      */
     public boolean luoF(File tiedosto) {
         try {
-            FileWriter fw = new FileWriter(tiedosto, true); // kirjoitetaan perään
+            FileWriter fw = new FileWriter(tiedosto);
+            System.out.println("onnistui luoF: " + tiedosto.getName());
+        } catch (NullPointerException e) {
+            System.out.println("ei onnistunut null luoF: " + tiedosto.getName());
+            return false;
         } catch (Exception e) {
+            System.out.println("ei onnistunut luoF: " + tiedosto.getName());
             return false;
         }
+
         return true;
     }
 
@@ -142,7 +145,7 @@ public class TiedostoKasittelija {
     public void talletaBingoOtsikko(File tiedosto, String otsikko) {
         if (onFOlemassa(tiedosto)) {
             if (!onOtsikkoOlemassa(tiedosto, otsikko)) {
-                lisaaTiedostoon(tiedosto, "\n" + otsikko);
+                lisaaTiedostoon(tiedosto, otsikko + "\n");
             }
         }
     }
@@ -153,19 +156,25 @@ public class TiedostoKasittelija {
         }
         return false;
     }
+    /**
+     * postaBingoOtsikko -lukee parametrinä annetun tiedoston Arrayhin onOtsikkoOlemassa -metodissa ja
+     * luo uuden strigin siten, että uuteen stringiin ei oteta mukaan parametrina annettua otsikkoa
+     * (sekin on string). talletaTiedostoon -metodi päivittää uuden stringin sisällön tiedostoon.
+     * @param tiedosto mistä luetaan
+     * @param otsikko mikä jätetään uuden tiedoston ulkopuolelle
+     */
 
     public void poistaBingoOtsikko(File tiedosto, String otsikko) {
         StringBuilder string = new StringBuilder();
         if (onFOlemassa(tiedosto)) {
             if (onOtsikkoOlemassa(tiedosto, otsikko)) {
-                for (int i = 0; i < tiedsis.size(); i++) {
-                    if (tiedsis.get(i).equalsIgnoreCase(otsikko)) {
-                        tiedsis.remove(i);
+                                for (int i = 0; i < tiedsis.size(); i++) {
+                    if (!tiedsis.get(i).equalsIgnoreCase(otsikko)) {
+                        string.append(tiedsis.get(i));
+                        string.append("\n");
                     }
-                    string.append(tiedsis.get(i));
-                    string.append("\n");
                 }
-                talletaTiedosto(tiedosto, string.toString());
+                                talletaTiedosto(tiedosto, string.toString());
             }
         }
     }
@@ -184,7 +193,6 @@ public class TiedostoKasittelija {
         try {
             FileWriter f = new FileWriter(tiedosto, true);
             f.write(tieto);
-            System.out.println("kirjoitettu perään: " + tieto);
             f.close();
         } catch (IOException e) {
             System.out.println("lisääTiedostoon: Tiedoston sulkuongelmia. " + e);
@@ -228,8 +236,7 @@ public class TiedostoKasittelija {
     public String haeSeuraava(File tiedosto, String otsikko) {
         if (onFOlemassa(tiedosto)) {
             lueArrayhin(tiedosto);
-            System.out.println("tied.sis. seuraava. size: " + tiedsis.size());
-            for (int i = 0; i < tiedsis.size(); i++) {
+                        for (int i = 0; i < tiedsis.size(); i++) {
                 if (tiedsis.get(i).equalsIgnoreCase(otsikko)) {
                     if (i + 1 > tiedsis.size() - 1) { // viimeinen?
                         return tiedsis.get(0); // palauta eka
