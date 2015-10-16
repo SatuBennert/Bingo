@@ -7,6 +7,7 @@
 Kaikkien käyttäjien toiminnot:
 * järjestelmään kirjautuminen
 * bingojen ylläpito: lisäys, muutos, poisto
+* bingojen selaus
 * bingon pelaaminen  
 
 Tulevat toiminnot:
@@ -15,4 +16,5 @@ Tulevat toiminnot:
 
 ###*Hauskaa peliä!* 
 ----- ***** ----- ***** ----- 
+
 
