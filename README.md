@@ -1,3 +1,6 @@
+Huom tarkastaja! Sekvenssikaavioita on vain kaksi, koska bingo on niin 
+yksinkertainen peli. 
+
 
 ## Saa rivi täyteen - 
 #                 Bingo!
