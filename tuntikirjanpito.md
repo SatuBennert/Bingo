@@ -28,3 +28,9 @@ to 09.10.| klo 17.30 - 18.30| JtextArea korjaus | 1,0 t
 pe 09.10.| klo 14.00 - 18.00| testien tekoa | 4,0 t 
 su 11.10.| klo 15.00 - 19.00| olio tiedostoon -opettelua | 4,0 t
 ma 12.10.| klo 08.00 - 13.00| testien kirj., pit ja cobertura | 5,0 t
+ti 13.10.| klo 12.00 - 14.00| demot | 2.0t
+ke 14.10.| klo 12.00 - 16.00| testit, dokut | 4,0 t
+pe 16.10.| klo 08.30 - 13.00| javadoc, kuvat, dokut | 4,5 t
+pe 16.10 | klo 16.00 - 18.00| virheen korjaus, uudet raport.| 2,0 t
+|| yhteensä:| 88,5 t
+
